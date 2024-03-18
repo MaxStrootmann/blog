@@ -1,4 +1,4 @@
-import { PortableText } from '@portabletext/react'
+import { PortableText, PortableTextReactComponents } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import { useLiveQuery } from 'next-sanity/preview'
@@ -15,6 +15,7 @@ import {
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import { formatDate } from '~/utils'
+import { ReactNode } from 'react'
 
 interface Query {
   [key: string]: string
@@ -51,6 +52,14 @@ export default function ProjectSlugRoute(
     slug: props.post.slug.current,
   })
 
+  const components = {
+    block: {
+      h2: ({ children }: { children: ReactNode }) => (
+        <h2 className="pt-4">{children}</h2>
+      ),
+    },
+  }
+
   return (
     <Container>
       <section className="post">
@@ -68,9 +77,14 @@ export default function ProjectSlugRoute(
         <div className="post__container">
           <h1 className="post__title">{post.title}</h1>
           <p className="post__excerpt">{post.excerpt}</p>
-          <p className="post__date">{formatDate(post._createdAt)}</p>
-          <div className="post__content">
-            <PortableText value={post.body} />
+          <p className="post__date text-slate-300">
+            {formatDate(post._createdAt)}
+          </p>
+          <div className="post__content text-lg lg:text-xl">
+            <PortableText
+              value={post.body}
+              components={components as Partial<PortableTextReactComponents>}
+            />
           </div>
         </div>
       </section>

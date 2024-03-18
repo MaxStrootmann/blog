@@ -4,12 +4,12 @@ export default function Container({ children }: { children: React.ReactNode }) {
   return (
     <div className="container">
       <header className="header">
-        <Link className="header__title" href="/">
+        <Link className="header__title text-slate-300" href="/">
           Max Strootmann - Blog
         </Link>
       </header>
       <main>{children}</main>
-      <footer className="footer">
+      <footer className="footer text-slate-300">
         <p className="footer__text">
           Made with{' '}
           <svg

@@ -4,7 +4,7 @@ export default function Container({ children }: { children: React.ReactNode }) {
   return (
     <div className="container">
       <header className="header">
-        <Link className="header__title text-slate-300" href="/">
+        <Link className="header__title text-slate-100" href="/">
           Max Strootmann - Blog
         </Link>
       </header>
